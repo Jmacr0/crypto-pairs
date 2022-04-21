@@ -17,6 +17,7 @@ Files:
 
 ## PWA
 
-- Service Worker
-    - Webpack 5 node.js polyfill removed Uncaught ReferenceError: process is not defined):
-        - npm i process and import webpack into webpack.config.js
+- Service Worker:
+    - Webpack 5 node.js polyfill removed (Uncaught ReferenceError: process is not defined):
+        - npm i process and import webpack into webpack.config.js.
+    - CRA has TS template for service-worker, serviceWorkerRegistration, and reportWebVitals.
