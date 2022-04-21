@@ -1,4 +1,5 @@
 const path = require("path");
+const webpack = require("webpack");
 
 module.exports={
     mode: "development", 
@@ -46,7 +47,18 @@ module.exports={
                 test: /\.(ts|tsx)$/,    //kind of file extension this rule should look for and apply in test
                 exclude: /node_modules/, //folder to be excluded
                 use:  'babel-loader' //loader which we are going to use
-            }
+            },
+            {
+                test: /\.css$/i,
+                use: ["style-loader","css-loader"],
+            },
         ]
-    }
+    },
+    plugins: [
+        // fix "process is not defined" error:
+        // (do "npm install process" before running the build)
+        new webpack.ProvidePlugin({
+          process: 'process/browser',
+        }),
+    ]
 };

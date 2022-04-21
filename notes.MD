@@ -14,3 +14,9 @@ Files:
  - .babelrc (configure babel settings, presets and plugins).
  - tsconfig.json (configure TS settings).
  - webpack.config.js (configure bundling settings).
+
+## PWA
+
+- Service Worker
+    - Webpack 5 node.js polyfill removed Uncaught ReferenceError: process is not defined):
+        - npm i process and import webpack into webpack.config.js
