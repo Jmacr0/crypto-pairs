@@ -5,11 +5,11 @@
   "private": true,
   "homepage": "http://jmacr0.github.io/crypto-pairs",
   "scripts": {
-    "start": "webpack-dev-server",
-    "build": "webpack",
+    "start": "webpack serve --config webpack.dev.js",
+    "build": "webpack --config webpack.prod.js",
     "test": "test",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d public"
+    "deploy": "gh-pages -d build"
   },
   "repository": {
     "type": "git",
@@ -55,7 +55,9 @@
     "process": "^0.11.10",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
+    "serve": "^13.0.2",
     "web-vitals": "^2.1.4",
+    "webpack-merge": "^5.8.0",
     "workbox-core": "^6.5.3",
     "workbox-expiration": "^6.5.3",
     "workbox-precaching": "^6.5.3",

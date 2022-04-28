@@ -8,7 +8,7 @@
     - Babel loader to turn TS into JS.
 
 - TypeScript just for type checking.
-- React to build FE components.
+- React to build FE components.s
 
 Files:
  - .babelrc (configure babel settings, presets and plugins).
@@ -24,4 +24,4 @@ Files:
 
 - Webpack - generate index.html, main,js, service-worker.js, manifest + favicon into build folder.
     - Inject manifest (workbox) injects into SW a list of URLs to precache.
-- Changed PUBLIC_URL to hard code in service-worker and serviceWorkerRegistration.s
+- Changed PUBLIC_URL to hard code in service-worker and serviceWorkerRegistration.

@@ -5,41 +5,17 @@ const CopyPlugin = require("copy-webpack-plugin");
 const {InjectManifest} = require("workbox-webpack-plugin");
 
 module.exports={
-    mode: "development", 
+    target: "web",
     entry: {
         main: "./src/index.tsx",
-        ["service-worker"]: "./src/service-worker.ts", 
+        // ["service-worker"]: "./src/service-worker.ts", 
     },
     output: {
-        path: path.resolve(__dirname, "build/static"),
+        path: path.resolve(__dirname, "build"),
         filename: "[name].js",
         clean: true,
     },
-    target: "web",
-    devServer: {
-        port: "9500",
-        static: ["./build"],
-        /** "open" 
-         * opens the browser after server is successfully started
-        */
-        open: true,
-        /** "hot"
-         * enabling and disabling HMR. takes "true", "false" and "only". 
-         * "only" is used if enable Hot Module Replacement without page 
-         * refresh as a fallback in case of build failures
-         */
-        hot: true ,
-        /** "liveReload"
-         * disable live reload on the browser. "hot" must be set to false for this to work
-        */
-        liveReload: true
-    },
     resolve: {
-        /** "extensions" 
-         * If multiple files share the same name but have different extensions, webpack will 
-         * resolve the one with the extension listed first in the array and skip the rest. 
-         * This is what enables users to leave off the extension when importing
-         */
         extensions: ['.tsx','.ts','.jsx','.js'] 
     },
     module:{
@@ -70,15 +46,16 @@ module.exports={
         new HtmlWebpackPlugin({
             title: 'Crypto Pairs',
             template: "public/index.html",
-            filename: '../index.html'
+            filename: "index.html"
         }),
         new CopyPlugin({
             patterns: [
-              { from: "public/static/manifest", to: "../static/manifest" },
+              { from: "public/static/manifest", to: "static/manifest" },
             ],
         }),
         new InjectManifest({
             swSrc: "./src/service-worker.ts",
+            swDest: "./service-worker.js",
         }),
     ],
 };
