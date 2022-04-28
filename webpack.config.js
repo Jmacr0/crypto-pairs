@@ -1,17 +1,24 @@
 const path = require("path");
 const webpack = require("webpack");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const CopyPlugin = require("copy-webpack-plugin");
+const {InjectManifest} = require("workbox-webpack-plugin");
 
 module.exports={
     mode: "development", 
-    entry: "./src/index.tsx", 
+    entry: {
+        main: "./src/index.tsx",
+        ["service-worker"]: "./src/service-worker.ts", 
+    },
     output: {
-        path: path.resolve(__dirname, "public"),
-        filename: "main.js"
+        path: path.resolve(__dirname, "build/static"),
+        filename: "[name].js",
+        clean: true,
     },
     target: "web",
     devServer: {
         port: "9500",
-        static: ["./public"],
+        static: ["./build"],
         /** "open" 
          * opens the browser after server is successfully started
         */
@@ -60,5 +67,18 @@ module.exports={
         new webpack.ProvidePlugin({
           process: 'process/browser',
         }),
-    ]
+        new HtmlWebpackPlugin({
+            title: 'Crypto Pairs',
+            template: "public/index.html",
+            filename: '../index.html'
+        }),
+        new CopyPlugin({
+            patterns: [
+              { from: "public/static/manifest", to: "../static/manifest" },
+            ],
+        }),
+        new InjectManifest({
+            swSrc: "./src/service-worker.ts",
+        }),
+    ],
 };

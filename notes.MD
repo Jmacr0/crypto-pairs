@@ -21,3 +21,7 @@ Files:
     - Webpack 5 node.js polyfill removed (Uncaught ReferenceError: process is not defined):
         - npm i process and import webpack into webpack.config.js.
     - CRA has TS template for service-worker, serviceWorkerRegistration, and reportWebVitals.
+
+- Webpack - generate index.html, main,js, service-worker.js, manifest + favicon into build folder.
+    - Inject manifest (workbox) injects into SW a list of URLs to precache.
+- Changed PUBLIC_URL to hard code in service-worker and serviceWorkerRegistration.s
