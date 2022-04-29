@@ -24,8 +24,10 @@ Files:
 
 - Webpack - generate index.html, main,js, service-worker.js, manifest + favicon into build folder.
     - Inject manifest (workbox) injects into SW a list of URLs to precache.
+    - source-map-loader to bundle source maps in node modules (was throwing devTools warning otherwise).
 - Changed PUBLIC_URL to hard code in service-worker and serviceWorkerRegistration.
     - Hardcoded /crypto-pairs/service-worker.js to the production route in service-worker (prefer using something like PUBLIC_URL, however SW has no access to window obj.)
     - When in dev SW wont work cause od the hardcode path. Unregister SW in development.
+
 
 - Material UI - bottom navigation for mobile, react-router.
