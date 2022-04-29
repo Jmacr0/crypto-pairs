@@ -17,4 +17,13 @@ module.exports = merge(common, {
 		hot: true ,
 		liveReload: true,    
 	},
+	module: { 
+		rules: [
+			{
+				test: /\.js$/,
+				enforce: "pre",
+				use: ["source-map-loader"],
+			},
+		],
+	}
 });
