@@ -9,10 +9,10 @@ import MobileNavigation from "./components/MobileNavigation";
 
 const RouterSwitch = () => {
 	return (
-		<Router>
+		<Router basename={process.env.BASE_URL}>
 			<Routes>
-				<Route path="/favourite/" element={<Home />}/>
-				<Route path="/dash/" element={<Home />}/>
+				<Route path="/favourite" element={<Home />}/>
+				<Route path="/dash" element={<Home />}/>
 				<Route path="/" element={<Home />}/>
 			</Routes>
 			<MobileNavigation />
