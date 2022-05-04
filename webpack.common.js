@@ -1,4 +1,5 @@
-const path = require("path");
+require("dotenv").config(); 
+
 const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
@@ -7,7 +8,11 @@ module.exports={
 	target: "web",
 	entry: {
 		main: "./src/index.tsx",
-		// ["service-worker"]: "./src/service-worker.ts", 
+	},
+	output: {
+		path: path.resolve(__dirname, "build"),
+		filename: "[name].js",
+		clean: true,
 	},
 	resolve: {
 		extensions: [".tsx",".ts",".jsx",".js"] 
@@ -37,6 +42,7 @@ module.exports={
 		new webpack.ProvidePlugin({
 			process: "process/browser",
 		}),
+		// new webpack.EnvironmentPlugin([""]),
 		new HtmlWebpackPlugin({
 			title: "Crypto Pairs",
 			template: "public/index.html",
