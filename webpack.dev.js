@@ -1,22 +1,26 @@
 const path = require("path");
 
+const webpack = require("webpack");
 const { merge } = require("webpack-merge");
 const common = require("./webpack.common.js");
 
 module.exports = merge(common, {
 	mode: "development",
-	output: {
-		path: path.resolve(__dirname, "build-dev"),
-		filename: "[name].js",
-		clean: true,
-	},
 	devServer: {
 		port: "9500",
-		static: ["./build-dev"],
+		static: ["./build"],
 		open: true,
 		hot: true ,
 		liveReload: true,    
+		proxy: {
+			"/api": "http://localhost:3000",
+		},
 	},
+	plugins: [
+		new webpack.EnvironmentPlugin({
+			BASE_URL: "/" 
+		}),
+	],
 	module: { 
 		rules: [
 			{
