@@ -16,13 +16,13 @@ const MobileNavigation = () => {
 	const handleNavigationChange = (_e: React.ChangeEvent<HTMLInputElement>, index: number) => {
 		switch (index) {
 		case 0:
-			navigate("/favourite/");
+			navigate("/favourite");
 			break;
 		case 1:
 			navigate("/");
 			break;
 		case 2:
-			navigate("/dash/");
+			navigate("/dash");
 			break;
 		default:
 			break;
