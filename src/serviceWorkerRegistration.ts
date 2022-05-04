@@ -24,9 +24,7 @@ type Config = {
 };
 
 export function register(config?: Config) {
-	if (
-	// process.env.NODE_ENV === 'production' && 
-		"serviceWorker" in navigator) {
+	if (process.env.NODE_ENV === "production" && "serviceWorker" in navigator) {
 		// The URL constructor is available in all browsers that support SW.
 		const publicUrl = new URL(process.env.PUBLIC_URL, window.location.href);
 		if (publicUrl.origin !== window.location.origin) {
@@ -37,6 +35,9 @@ export function register(config?: Config) {
 		}
 
 		const additionalPath = window.location.href.replace(window.location.origin, "");
+
+		// If user refreshes a route that isn't root, then return.
+		if(`${process.env.BASE_URL}/` !== additionalPath ) return;
 
 		window.addEventListener("load", () => {
 			const swUrl = `${additionalPath}service-worker.js`;
