@@ -45,6 +45,8 @@
         ],
         "no-undef":"off",
         "@typescript-eslint/no-var-requires": "off",
-        "object-curly-spacing": [2,"always"]
+        "object-curly-spacing": [2,"always"],
+        // Don't need to import React for every jsx module - as this is done automatically already - so turn off warning.
+        "react/react-in-jsx-scope": "off"
     }
 }
