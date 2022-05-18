@@ -42,3 +42,21 @@ Files:
 
 ## State management
 - Redux used to handle global state management.
+
+## Search
+- Used a debounce to limit API requests - using CoinGecko API.
+- Had to use useRef to hold value of search term as debounced function would reference initial state as search term (empty string).
+- Search Bar > Search Results > Single Result & Selected Result
+
+- useEffect runs effect(fn) once basePair is true (as in dep array). Cleanup used to restore init error value (false) on comp unmount.
+
+
+## Design Philosophy
+
+
+- File Structure:
+    - component
+        - index.tsx
+        - ? index.css
+        - ? helper (directory)
+            - helperName.tsx
