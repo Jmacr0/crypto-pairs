@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate , useLocation } from "react-router-dom";
 
 import BottomNavigation from "@mui/material/BottomNavigation";
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
@@ -12,6 +12,7 @@ import DashboardIcon from "@mui/icons-material/Dashboard";
 const MobileNavigation = () => {
 	// React-router hook to change URL.
 	const navigate = useNavigate();
+	const location = useLocation();
 
 	const handleNavigationChange = (_e: React.ChangeEvent<HTMLInputElement>, index: number) => {
 		switch (index) {
@@ -35,9 +36,33 @@ const MobileNavigation = () => {
 				showLabels
 				onChange={handleNavigationChange}
 			>
-				<BottomNavigationAction label="Fave" icon={<FavoriteIcon sx={{ fontSize: 25 }}/>} />
-				<BottomNavigationAction label="Home" icon={<HomeIcon sx={{ fontSize: 25 }}/>} />
-				<BottomNavigationAction label="Dash" icon={<DashboardIcon sx={{ fontSize: 25 }}/>} />
+				<BottomNavigationAction 
+					label="Fave" 
+					icon={
+						<FavoriteIcon 
+							sx={{ fontSize: 25 }}
+							color={location.pathname === "/favourite" ? "primary" : "secondary"}
+						/>
+					} 
+				/>
+				<BottomNavigationAction 
+					label="Home" 
+					icon={
+						<HomeIcon 
+							sx={{ fontSize: 25 }}
+							color={location.pathname === "/" ? "primary" : "secondary"}
+						/>
+					} 
+				/>
+				<BottomNavigationAction 
+					label="Dash" 
+					icon={
+						<DashboardIcon 
+							sx={{ fontSize: 25 }}
+							color={location.pathname === "/dash" ? "primary" : "secondary"}
+						/>
+					} 
+				/>
 			</BottomNavigation>	
 		</Paper>
 	);
