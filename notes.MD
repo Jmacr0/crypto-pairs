@@ -8,7 +8,7 @@
     - Babel loader to turn TS into JS.
 
 - TypeScript just for type checking.
-- React to build FE components.s
+- React to build FE components.
 
 Files:
  - .babelrc (configure babel settings, presets and plugins).
@@ -28,13 +28,16 @@ Files:
     - source-map-loader to bundle source maps in node modules (was throwing devTools warning otherwise).
     - Environment plugin to inject the variables in .env.
     - Set BASE_URL in each webpack config (used for React Router).
-    
+    - webServer historyApiFallback true (when page refreshed, load current route)
+        - otherwise cannot GET http://root/sub-route
+        - need to solve this issue for prod.
+
 - Changed PUBLIC_URL to hard code in service-worker and serviceWorkerRegistration.
     - Hardcoded /crypto-pairs/service-worker.js to the production route in service-worker (prefer using something like PUBLIC_URL, however SW has no access to window obj.)
     - When in dev SW wont work cause of the hardcode path. Unregister SW in development.
 
 - Material UI - bottom navigation for mobile, react-router.
-
+s
 - React Router - basename prop used to set base url used for react router components (like navigate).
 
 - tsconfig - add react-jsx so no need to import React for every module as per react 17.
@@ -52,7 +55,8 @@ Files:
 
 
 ## Design Philosophy
-
+- Minimal code that is clear enough to understand but not super verbose and difficult to read.
+    -
 
 - File Structure:
     - component
