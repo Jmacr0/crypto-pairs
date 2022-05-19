@@ -12,7 +12,7 @@ SO I can make an investment decision
 
 *See the live version: https://jmacr0.github.io/crypto-pairs/*
 
-![Alt Text](https://github.com/Jmacr0/crypto-pairs/blob/main/external_assets/Download_PWA_example.gif)
+![Download PWA example gif.](https://github.com/Jmacr0/crypto-pairs/blob/main/vendor/Download_PWA_example.gif)
 ---
 ## Quick Run Down
 Crypto Pairs is built on React, using Webpack, Babel, and TypeScript.
