@@ -12,6 +12,8 @@ SO I can make an investment decision
 
 *See the live version: https://jmacr0.github.io/crypto-pairs/*
 
+***Install the app to desktop:***
+
 ![Download PWA example gif.](https://github.com/Jmacr0/crypto-pairs/blob/main/vendor/Download_PWA_example.gif)
 ---
 ## Quick Run Down
