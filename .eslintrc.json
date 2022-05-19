@@ -43,6 +43,7 @@
             "error",
             "always"
         ],
+        "no-unreachable": "error",
         "no-undef":"off",
         "@typescript-eslint/no-var-requires": "off",
         "object-curly-spacing": [2,"always"],
