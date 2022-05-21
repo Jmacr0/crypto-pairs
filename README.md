@@ -1,4 +1,4 @@
-# Crypto Pairs 
+# Crypto Pairs ![](https://img.shields.io/github/license/Jmacr0/crypto-pairs) ![](https://img.shields.io/github/v/release/jmacr0/crypto-pairs?include_prereleases)
 ---
 **An application that displays cryptocurrency pair values.**
 
