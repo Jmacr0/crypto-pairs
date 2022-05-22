@@ -5,6 +5,9 @@ const store = configureStore({
 	reducer: {
 		searchBar: searchBarReducer,
 	},
+	middleware: getDefaultMiddleware => getDefaultMiddleware({
+		serializableCheck: false
+	})
 });
 
 export default store;
