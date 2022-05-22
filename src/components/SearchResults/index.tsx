@@ -48,20 +48,25 @@ const SearchResults = () => {
 		URL += "&order=market_cap_desc&per_page=100";
 		URL += "&page=1&sparkline=false&price_change_percentage=1h%2C24h%2C7d";
 
-		const otherURL = `https://api.coingecko.com/api/v3/coins/${baseCoin.id}?localization=false&community_data=false&developer_data=false`;
-		const res = await fetch(otherURL);
-		let jsonn = await res.json();
-		console.log(jsonn.market_data);		
-
-		jsonn = processAPIData2(baseCoin, jsonn.market_data);
+		let fallbackURL = "https://api.coingecko.com/api/v3";
+		fallbackURL += `/coins/${baseCoin.id}?`;
+		fallbackURL += "localization=false&community_data=false&developer_data=false";
 
 		try {
 			const response = await fetch(URL);
-			if(!response.ok) throw new Error(response.status === 400 ? "Unsupported coin pair." : "Error fetching data.");
-			let json = await response.json();
-			json = processAPIData(baseCoin,json);
-			// console.log(json);
-			dispatch(setPairs(json));
+			if(!response.ok) {
+				if(response.status !== 400) throw new Error("Error fetching data.");
+				const fallbackResponse = await fetch(fallbackURL);
+				if(!fallbackResponse.ok) throw new Error("Error fetching data.");
+				let fallbackJSON = await fallbackResponse.json();
+				fallbackJSON = processAPIData2(fallbackJSON.market_data);
+				dispatch(setPairs(fallbackJSON));
+			} else {
+				let json = await response.json();
+				json = processAPIData(baseCoin, json);
+				console.log(json);
+				dispatch(setPairs(json));
+			}
 		} catch ({ message }){
 			dispatch(setError({ exist: true, message }));
 		}
