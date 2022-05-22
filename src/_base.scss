@@ -1,0 +1,25 @@
+// color indicators for pair performance.
+$down-alil: #ff9500;
+$down-abit: #ff1900;
+$down-alot: #bc0202;
+
+$up-alil: #D9F505;
+$up-abit: #a2ed21;
+$up-alot: #28dd0c;
+
+.up {
+    &.bg {
+        &.alil {background-color: $up-alil;}
+        &.abit {background-color: $up-abit;}
+        &.alot {background-color: $up-alot;}
+    }
+}
+
+.down {
+    &.bg {
+        color: white;
+        &.alil {background-color: $down-alil;}
+        &.abit {background-color: $down-abit;}
+        &.alot {background-color: $down-alot;}
+    }
+}
