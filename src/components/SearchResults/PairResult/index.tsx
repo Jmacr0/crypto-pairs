@@ -9,13 +9,13 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import Typography from "@mui/material/Typography";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import Chip from "@mui/material/Chip";
+import Stack from "@mui/material/Stack";
 
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ArrowDownIcon from "@mui/icons-material/ArrowDropDown";
 import ArrowUpIcon from "@mui/icons-material/ArrowDropUp";
 
-import "./index.css";
-import { Stack } from "@mui/material";
+import "./index.scss";
 
 interface PairResultProps {
     index: number;
@@ -62,41 +62,62 @@ const PairResult = ({ index, coin }: PairResultProps)=> {
 							height={25}
 							className="coin-img"
 						/>
-						<img 
-							src={coin.image} 
-							alt={coin.name + "-image"} 
-							height={25}
-							className="coin-img"
-						/>
+						{coin.image ?
+							<img 
+								src={coin.image} 
+								alt={coin.name + "-image"} 
+								height={25}
+								className="coin-img"
+							/>
+							:
+							<Chip 
+								label={coin.symbol.charAt(0).toUpperCase()}
+								style={{ marginRight: "0.25rem" }}
+							/>
+						}
 						<Typography variant="button" component="p">
-							{baseCoin.symbol + " / " + coin.symbol.toLocaleUpperCase()}
+							{baseCoin.symbol + " / " + coin.symbol.toUpperCase()}
 						</Typography>
 					</Stack>
 					<Stack
 						direction="row"
 						alignItems="center"
 					>
-						<Chip label="H" />
-						<Chip label="D" />
+						{Boolean(coin.price_change_percentage_1h_in_currency) &&
+							<Chip label="H" className={setColor(coin.price_change_percentage_1h_in_currency)}/>
+						}	
+						<Chip label="D" className={setColor(coin.price_change_percentage_24h_in_currency)}/>
+						<Chip label="W" className={setColor(coin.price_change_percentage_7d_in_currency)}/>
 					</Stack>
 				</AccordionSummary>
 				<AccordionDetails>
 					<Typography variant="h4">
-						<div>{coin.current_price.toFixed(4)}</div>
+						<div>
+							{parseFloat(coin.current_price.toFixed(4)) <= 0 ? coin.current_price :coin.current_price.toFixed(4)}
+						</div>
 					</Typography>
 					<Typography component="div">
+						{Boolean(coin.price_change_percentage_1h_in_currency) &&
+							<div>
+								<Chip 
+									icon={coin.price_change_percentage_1h_in_currency > 0 ? <ArrowUpIcon /> : <ArrowDownIcon/>} 
+									label={`${coin.price_change_percentage_1h_in_currency.toFixed(2)}%  1H`} 
+									className={setColor(coin.price_change_percentage_1h_in_currency)}
+								/>
+							</div>
+						}
 						<div>
 							<Chip 
-								color={coin.price_change_percentage_1h_in_currency > 0 ? "success" : "error"} 
-								icon={coin.price_change_percentage_1h_in_currency > 0 ? <ArrowUpIcon /> : <ArrowDownIcon/>} 
-								label={`${coin.price_change_percentage_1h_in_currency.toFixed(2)}%  1H`} 
+								icon={coin.price_change_percentage_24h_in_currency > 0 ? <ArrowUpIcon /> : <ArrowDownIcon/>} 
+								label={`${coin.price_change_percentage_24h_in_currency.toFixed(2)}%  24H`} 
+								className={setColor(coin.price_change_percentage_24h_in_currency)}
 							/>
 						</div>
 						<div>
 							<Chip 
-								color={coin.price_change_percentage_24h_in_currency > 0 ? "success" : "error"} 
-								icon={coin.price_change_percentage_24h_in_currency > 0 ? <ArrowUpIcon /> : <ArrowDownIcon/>} 
-								label={`${coin.price_change_percentage_24h_in_currency.toFixed(2)}%  24H`} 
+								icon={coin.price_change_percentage_7d_in_currency > 0 ? <ArrowUpIcon /> : <ArrowDownIcon/>} 
+								label={`${coin.price_change_percentage_7d_in_currency.toFixed(2)}%  24H`} 
+								className={setColor(coin.price_change_percentage_7d_in_currency)}
 							/>
 						</div>
 					</Typography>
@@ -104,6 +125,18 @@ const PairResult = ({ index, coin }: PairResultProps)=> {
 			</Accordion>
 		</div>
 	);
+};
+
+const setColor =(percent: number) => {
+	let color;
+	if(percent > 3) color = "up bg alot";
+	if(percent > 2 && percent < 3) color = "up bg abit";
+	if(percent > 0 && percent< 2) color = "up bg alil";
+	if(percent < 0 && percent > -2) color = "down bg alil";
+	if(percent < -2 && percent > -3) color = "down bg abit";
+	if(percent < -3) color = "down bg alot";
+
+	return color;
 };
 
 export default PairResult;
