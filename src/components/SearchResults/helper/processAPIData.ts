@@ -11,29 +11,23 @@ const processAPIData = (baseCoin: SearchResult, jsonResponse: PairCoin[]) => {
 				current_price: 1 / coin.current_price,
 				price_change_percentage_1h_in_currency: coin.price_change_percentage_1h_in_currency * -1,
 				price_change_percentage_24h_in_currency: coin.price_change_percentage_24h_in_currency * -1,
+				price_change_percentage_7d_in_currency: coin.price_change_percentage_7d_in_currency * -1,
 			};
-			console.log(coin);
 			return coin;
 		});
 	return json;
 };
 
-export const processAPIData2 = (baseCoin: SearchResult, market_data) => {
-	const json = market_data;
-
-	/**
-	 * price change 1h (calculate manually)
-	 * price change percent 1h
-	 * 
-	 * price change 24h
-	 * price change percent 24h
-	 * 
-	 * ath
-	 * ath percentage
-	 * atl
-	 * atl percentage
-	 */
-
+export const processAPIData2 = (market_data: PairCoin) => {
+	const json = [];
+	const len = Object.keys(market_data["current_price"]);
+	len.forEach(coin => json.push({
+		"symbol": coin,
+		"current_price": market_data.current_price[coin],
+		"price_change_percentage_1h_in_currency": market_data.price_change_percentage_1h_in_currency[coin],
+		"price_change_percentage_24h_in_currency":market_data.price_change_percentage_24h_in_currency[coin],
+		"price_change_percentage_7d_in_currency": market_data.price_change_percentage_7d_in_currency[coin],
+	}));
 	return json;
 };
 
