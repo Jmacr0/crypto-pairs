@@ -30,6 +30,11 @@ const SearchBar = () => {
 	const dispatch = useTypedDispatch();
 
 	const handleCoinGeckoRequest = async () => {
+		console.log("sending");
+		if(!searchRef.current){
+			dispatch(setResults([]));
+			return;
+		}
 		const response = await fetch(`https://api.coingecko.com/api/v3/search?query=${searchRef.current}`);
 		if(!response.ok) return;
 		const json = await response.json();
@@ -42,11 +47,7 @@ const SearchBar = () => {
 		dispatch(setBaseCoin(undefined));
 		dispatch(searchTermChange(e.currentTarget.value));
 		searchRef.current = e.currentTarget.value;
-		if(!searchRef.current){
-			dispatch(loadingChange(false));
-			dispatch(setResults([]));
-			return;
-		}
+		if(!searchRef.current) dispatch(loadingChange(false));
 		debouncedRequest();
 	};
 
@@ -54,7 +55,7 @@ const SearchBar = () => {
 		let timer;
 		return (...args) => {
 			clearTimeout(timer);
-			timer = setTimeout(() => { 
+			timer = setTimeout(() => {
 				fn(...args); 
 			}, delay);
 		};
