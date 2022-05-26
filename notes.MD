@@ -49,6 +49,9 @@ s
 ## Search
 - Used a debounce to limit API requests - using CoinGecko API.
 - Had to use useRef to hold value of search term as debounced function would reference initial state as search term (empty string).
+- Handle edgecase where you backspace from 1 letter input to none, loading will stop but prev debounced fn gets run and uses searchRef.current of "" as search term.
+    - in request fn add check if search term is empty.
+
 - Search Bar > Search Results > Single Result & Selected Result
 
 - useEffect runs effect(fn) once basePair is true (as in dep array). Cleanup used to restore init error value (false) on comp unmount.
