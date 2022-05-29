@@ -116,7 +116,7 @@ const PairResult = ({ index, coin }: PairResultProps)=> {
 						<div>
 							<Chip 
 								icon={coin.price_change_percentage_7d_in_currency > 0 ? <ArrowUpIcon /> : <ArrowDownIcon/>} 
-								label={`${coin.price_change_percentage_7d_in_currency.toFixed(2)}%  24H`} 
+								label={`${coin.price_change_percentage_7d_in_currency.toFixed(2)}%  7D`} 
 								className={setColor(coin.price_change_percentage_7d_in_currency)}
 							/>
 						</div>
